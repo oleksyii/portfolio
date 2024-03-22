@@ -1,9 +1,9 @@
 import React from 'react';
-import TopNavbar from '../utils/TopNavbar';
-import Graphics from '../lab1/Graphics';
+import TopNavbar from '../../utils/TopNavbar';
+import Graphics from './lab1Utils/Graphics';
 // import Temporary from '../utils/Temporary'
 
-const Lab1 = () => {
+const Graphs = () => {
     return ( 
         <div>
             <TopNavbar />
@@ -13,4 +13,4 @@ const Lab1 = () => {
      );
 }
  
-export default Lab1;
+export default Graphs;

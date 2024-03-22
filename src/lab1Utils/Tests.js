@@ -6,25 +6,28 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import FormGroup from 'react-bootstrap/FormGroup'
 import { useNavigate } from 'react-router-dom';
+import download from '../../../utils/download';
 
-import questions from '../data/questions';
+// import questions from '../data/questions';
 
 
-const Tests = () => {
+const Tests = (props) => {
+  
+  // const [questions, setQuestions] = useState([]);
+
   const [answers, setAnswers] = useState({});
   const [selectedOptions, setSelectedOptions] = useState([]);
   const navigate = useNavigate();
-
-  const getRandomIndex = (maxIndex) => {
-    return Math.floor(Math.random() * maxIndex);
-  };
-
+  
+  const TestTitle = props.title;
+  const questions = props.questions;
+  
   useEffect(() => {
+    console.log(questions);
     const newSelectedOptions = questions.map((question, index) => {
       const randomIndex = Math.floor(Math.random() * question.options.length);
       return randomIndex;
     });
-    console.log(newSelectedOptions);
     setSelectedOptions(newSelectedOptions);
 
     // Initialize an empty object to accumulate the updates
@@ -32,14 +35,15 @@ const Tests = () => {
 
     // Iterate over questions and update the corresponding answer
     questions.forEach((question, index) => {
-        console.log('questions');
       updatedAnswers[`question${index + 1}`] =
         question.options[newSelectedOptions[index]].value;
     });
 
+    console.log(updatedAnswers);
     // Update the answers state once with the final updatedAnswers object
-    setAnswers({ ...answers, ...updatedAnswers });
+    setAnswers(updatedAnswers);
     console.log(answers);
+
   }, []);
 
   const handleChange = (event, index) => {
@@ -47,8 +51,7 @@ const Tests = () => {
     newSelectedOptions[index] = parseInt(event.target.value);
     setSelectedOptions(newSelectedOptions);
 
-    console.log(event.target);
-    const { name, value, plevel } = event.target;
+    const { name, value } = event.target;
     setAnswers({ ...answers, [name]: parseInt(value) });
     console.log(answers);
   };
@@ -99,7 +102,6 @@ const Tests = () => {
                     value={selectedOptions[index]}
                     onChange={(event) => handleChange(event, index)}
                   >
-                    {/* <option>Обрати</option> */}
                     {question.options.map((op) => (
                       <option value={op.value}>{op.key}</option>
                     ))}
