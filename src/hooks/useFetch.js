@@ -15,6 +15,7 @@ const useFetch = (url) => {
                 if (!res.ok) {
                     throw Error('Could not fetch data for questions');
                 }
+                // console.log(res.json());
                 return res.json();
             })
             .then((data) => {

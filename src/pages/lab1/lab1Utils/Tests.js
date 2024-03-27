@@ -23,11 +23,12 @@ const Tests = (props) => {
   const questions = props.questions;
   
   useEffect(() => {
+    console.log('hello from tests');
     console.log(questions);
     const newSelectedOptions = questions.map((question, index) => {
       const randomIndex = Math.floor(Math.random() * question.options.length);
       return randomIndex;
-    });
+    }, []);
     setSelectedOptions(newSelectedOptions);
 
     // Initialize an empty object to accumulate the updates

@@ -7,7 +7,12 @@ import useFetch from '../../hooks/useFetch';
 
 const Lab1 = () => {
 
-    const {data: questions, isPending, error} = useFetch('http://localhost:8000/questions');
+    const {data: questions, isPending, error} = useFetch('http://localhost:5000/questions');
+
+    useEffect(() => {
+        console.log("hello");
+        console.log(questions);
+    }, [questions]);
 
     return ( 
         <div>     
